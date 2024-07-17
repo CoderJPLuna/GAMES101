@@ -9,8 +9,6 @@
 
 In general, $( x,y,z,w )(w \neq 0)$ is the 3D point $( x/w,y/w,z/w )$ .
 
-## 3D Transformations
-
 ### Translation Matrix
 
 $$
@@ -165,13 +163,61 @@ $$
     T_{view}=
     \left[
     \begin{matrix}
-    1 & 0 & 0 & -x_e\\
-    0 & 1 & 0 & -y_e\\
-    0 & 0 & 1 & -z_e\\
+    1 & 0 & 0 & -x_{\vec{e}}\\
+    0 & 1 & 0 & -y_{\vec{e}}\\
+    0 & 0 & 1 & -z_{\vec{e}}\\
+    0 & 0 & 0 & 1
+    \end{matrix}
+    \right]
+    $$
+  * Rotate $\hat{g}$ to $-Z$ , $\hat{t}$ to $Y$ , $(\hat{g} \times \hat{t})$ to $X$
+  * Consider its inverse rotation: $X$ to $(\hat{g} \times \hat{t})$ ,$Y$ to $\hat{t}$ , $Z$ to $- \hat{g}$
+    $$
+    R^{-1}_{view}=
+    \left[
+    \begin{matrix}
+    x_{\hat{g} \times \hat{t}} & x_{\hat{t}} & x_{-\hat{g}} & 0\\
+    y_{\hat{g} \times \hat{t}} & y_{\hat{t}} & y_{-\hat{g}} & 0\\
+    z_{\hat{g} \times \hat{t}} & z_{\hat{t}} & z_{-\hat{g}} & 0\\
+    0 & 0 & 0 & 1
+    \end{matrix}
+    \right]
+    $$
+    $$
+    R_{view}=
+    \left[
+    \begin{matrix}
+    x_{\hat{g} \times \hat{t}} & y_{\hat{g} \times \hat{t}} & z_{\hat{g} \times \hat{t}} & 0\\
+    x_{\hat{t}} & y_{\hat{t}} & z_{\hat{t}} & 0\\
+    x_{-\hat{g}} & y_{-\hat{g}} & z_{-\hat{g}} & 0\\
     0 & 0 & 0 & 1
     \end{matrix}
     \right]
     $$
 
 ### Projection transformation
+
+#### Orthographic projection
+
+* Understanding
+  * Camera located at origin,looking at $-Z$, up at $Y$ 
+  * Drop $Z$ coordinate
+  * Translate and scale the resulting rectangle to $[-1,1]^2$
+* In general
+  * We want to map a cuboid $[left,right] \times [bottom,top] \times [far,near]$ to the "canonical" cube $[-1,1]^3$
+* Transformation matrix
+  $$
+  M_{ortho}=
+  \left[
+  \begin{matrix}
+  \frac{2}{r-l} & 0 & 0 & 0\\
+  0 & \frac{2}{t-b} & 0 & 0\\
+  0 & 0 & \frac{2}{n-f} & 0\\
+  0 & 0 & 0 & 1
+  \end{matrix}
+  \right]
+  $$
+
+
+#### Perspective projection
 
