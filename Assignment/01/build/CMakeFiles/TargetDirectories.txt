@@ -1,0 +1,3 @@
+/home/ArchLinux/GAMES101/Assignment/01/build/CMakeFiles/Rasterizer.dir
+/home/ArchLinux/GAMES101/Assignment/01/build/CMakeFiles/edit_cache.dir
+/home/ArchLinux/GAMES101/Assignment/01/build/CMakeFiles/rebuild_cache.dir
